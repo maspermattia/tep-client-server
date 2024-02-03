@@ -50,9 +50,9 @@ public class Game implements Runnable {
         mazziereHand.clear();
         giocatoriHands.clear();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             mazziereHand.add(mazzo.pescaCarta()); 
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < 1; j++) {
                 List<Integer> hand = new ArrayList<>();
                 hand.add(mazzo.pescaCarta()); 
                 giocatoriHands.add(hand);
