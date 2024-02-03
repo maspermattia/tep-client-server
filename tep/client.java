@@ -13,17 +13,23 @@ public class Client {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
+            
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Inserisci il tuo nome: ");
+            String playerName = scanner.nextLine();
+            out.println(playerName);
+
             String serverResponse = in.readLine();
             System.out.println("Server: " + serverResponse);
 
-            out.println("start"); // Conferma per iniziare la partita
+            out.println("start"); 
 
+            
             while (true) {
                 String message = in.readLine();
                 System.out.println("Server: " + message);
 
                 if (message.startsWith("Vuoi giocare di nuovo?")) {
-                    Scanner scanner = new Scanner(System.in);
                     String risposta = scanner.nextLine();
                     out.println(risposta.toLowerCase());
                     if (!risposta.equalsIgnoreCase("sì")) {
@@ -32,7 +38,6 @@ public class Client {
                 }
 
                 if (message.startsWith("La tua mano")) {
-                    Scanner scanner = new Scanner(System.in);
                     String risposta = scanner.nextLine();
                     out.println(risposta.toLowerCase());
                 }

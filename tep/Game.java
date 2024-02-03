@@ -3,14 +3,17 @@ import java.net.*;
 import java.util.*;
 
 public class Game implements Runnable {
+    private static final double DEFAULT_TARGET_SCORE = 7.5;
+    private double targetScore; 
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
     private List<Integer> mazziereHand;
     private List<List<Integer>> giocatoriHands;
     private MazzoDiCarte mazzo; 
-
-    public Game(Socket socket) {
+        public Game(Socket socket) {
+        
+        this.targetScore = DEFAULT_TARGET_SCORE;
         this.clientSocket = socket;
         this.mazziereHand = new ArrayList<>();
         this.giocatoriHands = new ArrayList<>();
@@ -115,3 +118,4 @@ public class Game implements Runnable {
         return punteggio;
     }
 }
+
