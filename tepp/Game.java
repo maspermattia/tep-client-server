@@ -39,10 +39,10 @@ public class Game implements Runnable {
                 determinaVincitore();
                 out.println("Vuoi giocare di nuovo? (sì/no)");
                 String risposta = in.readLine();
-                if (!risposta.equalsIgnoreCase("sì")) {
+                if (!risposta.equalsIgnoreCase("si")) {
                     riavviaGioco = false;
                     out.println("Grazie per aver giocato!"); 
-                    clientSocket.close();
+                  
                 }
             }
             
