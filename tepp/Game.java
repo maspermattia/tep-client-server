@@ -1,4 +1,3 @@
-// Game.java
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -32,12 +31,14 @@ public class Game implements Runnable {
 
             String playerName = in.readLine();
 
+  
+
             while (riavviaGioco) { 
                 distribuisciCarte();
                 gestisciGiocatore();
                 gestisciMazziere();
                 determinaVincitore();
-                out.println("Vuoi giocare di nuovo? (sì/no)");
+                out.println("Vuoi giocare di nuovo? (si/no)");
                 String risposta = in.readLine();
                 if (!risposta.equalsIgnoreCase("si")) {
                     riavviaGioco = false;
@@ -69,14 +70,14 @@ public class Game implements Runnable {
     private void gestisciGiocatore() throws IOException {
         boolean pescaAncora = true;
         while (pescaAncora) {
-            out.println("La tua mano: " + giocatoreHand + ". Il punteggio è: " + calcolaPunteggio(giocatoreHand));
-            out.println("Desideri una carta aggiuntiva? (sì/no)");
+            out.println("La tua mano: " + giocatoreHand + ". Il tuo punteggio : " + calcolaPunteggio(giocatoreHand));
+            out.println("Desideri una carta aggiuntiva? (si/no)");
             String risposta = in.readLine();
             if (risposta.equalsIgnoreCase("si")) {
                 double cartaPescata = mazzo.pescaCarta();
                 giocatoreHand.add(cartaPescata);
                 double punteggio = calcolaPunteggio(giocatoreHand);
-                out.println("Hai pescato una carta: " + cartaPescata + ". La tua mano: " + giocatoreHand + ". Il punteggio è: " + punteggio);
+                out.println("Hai pescato una carta: " + cartaPescata);
                 if (punteggio > 7.5) {
                     out.println("Hai sballato! Il punteggio è superiore a 7.5.");
                     pescaAncora = false;
@@ -94,17 +95,27 @@ public class Game implements Runnable {
     private void gestisciMazziere() {
         double punteggio = calcolaPunteggio(giocatoreHand);
         if (punteggio > 7.5) {
-            
             return;
-          
         }
+        
+  
+        out.println("La mano iniziale del mazziere : " + mazziereHand + ". Il suo punteggio : " + calcolaPunteggio(mazziereHand));
+        
         double punteggioMazziere = calcolaPunteggio(mazziereHand);
         while (punteggioMazziere < 5) {
-            mazziereHand.add(mazzo.pescaCarta());
+            double cartaPescata = mazzo.pescaCarta();
+            mazziereHand.add(cartaPescata);
             punteggioMazziere = calcolaPunteggio(mazziereHand);
+            
+            
+            out.println("Il mazziere ha pescato una carta: " + cartaPescata + ". Nuova mano del mazziere: " + mazziereHand + ". Nuovo punteggio: " + punteggioMazziere);
         }
-        out.println("Il punteggio del mazziere è: " + punteggioMazziere + ". La mano del mazziere: " + mazziereHand);
+        
+   
+        out.println("Il punteggio finale del mazziere : " + punteggioMazziere + ". La mano finale del mazziere : " + mazziereHand);
     }
+    
+    
 
     private void determinaVincitore() {
         double punteggioMazziere = calcolaPunteggio(mazziereHand);
